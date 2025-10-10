@@ -7,5 +7,7 @@ def show_navbar():
             ui.link('Home', '/')
             
         with ui.row():
+            ui.link('Issue Detail', '/issue_detail')
+            
             ui.link('Signup', '/signup')
             ui.link('Signin', '/signin')
