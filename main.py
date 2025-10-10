@@ -9,4 +9,4 @@ from pages.warrior import *
 
 app.add_static_files("/assets", "assets")
 
-ui.run(title="TankasApp")
+ui.run(title="TankasApp", storage_secret="sydnorhannahmarionadomaclaudiajermieakorfasoboloafiagifty")
