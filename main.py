@@ -6,7 +6,8 @@ from pages.signup import *
 from pages.issues import *
 from pages.issue_detail import *
 from pages.warrior import *
+from pages.post_issue import *
 
 app.add_static_files("/assets", "assets")
 
-ui.run(title="TankasApp", storage_secret="sydnorhannahmarionadomaclaudiajermieakorfasoboloafiagifty")
+ui.run(title="TankasApp", storage_secret="qrackhydrarionsydnorhannah")
