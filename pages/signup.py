@@ -3,7 +3,7 @@ from components.navbar import show_navbar
 import requests
 from utils.api import base_url
 
-# _signup_btn: ui.button = None
+_signup_btn: ui.button = None
 
 # def _run_signup(data):
 #     return requests.post(f"{base_url}/users/register", data=data)

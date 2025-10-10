@@ -3,13 +3,20 @@ from components.navbar import show_navbar
 import requests
 from utils.api import base_url
 
-# def _signin_user(data):
-#     response = requests.post(f"{base_url}/users/login", data=data)
-#     print(response.status_code, response.content)
-#     if response.status_code == 200:
-#         json_data = response.json()
-#         app.storage.user["access_token"] = json_data["access_token"]
-#         return ui.navigate.back()
+_signin_btn: ui.button = None
+
+def _run_signin(data):
+    return requests.post(f"{base_url}/api/auth/login", data=data)
+
+async def _signin_user(data):
+    _signin_btn.props(add="disable loading")
+    response = await run.cpu_bound(_run_signin, data)
+    print(response.status_code, response.content)
+    _signin_btn.props(remove="disable loading")
+    if response.status_code == 200:
+        json_data = response.json()
+        app.storage.user["access_token"] = json_data["access_token"]
+        return ui.navigate.back()
 
 _login_btn: ui.button = None
 
