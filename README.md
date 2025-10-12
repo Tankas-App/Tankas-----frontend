@@ -332,3 +332,11 @@ LAYOUT:
 - ui.row() and ui.column() for layout
 - ui.grid() for responsive grids
 - ui.expansion() for collapsible sections
+
+
+COLORS
+#F7FFF7 - MINT CREAM
+#007F7C - TEAL
+#ade6e5ff - Light TEAL
+#2E86AB - BLUE(NCS)
+#0A0A0A - NIGHT
