@@ -1,7 +1,7 @@
 from nicegui import ui
 
-@ui.page('/tutorial3')
-def show_tutorial3():
+@ui.page('/tutorial4')
+def show_tutorial4():
     ui.add_head_html('<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">')
 
     with ui.element("main").classes("w-full h-screen flex justify-center items-center").style('font-family: "Raleway", serif;'):
