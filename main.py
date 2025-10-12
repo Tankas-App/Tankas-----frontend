@@ -8,6 +8,9 @@ from pages.issue_detail import *
 from pages.issue_confirmation import *
 from pages.warrior import *
 from pages.post_issue import *
+from pages.tutorial1 import *
+from pages.tutorial2 import *
+from pages.tutorial3 import *
 
 app.add_static_files("/assets", "assets")
 
