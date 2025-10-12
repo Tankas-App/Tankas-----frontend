@@ -51,7 +51,7 @@ def show_signin_page():
         ui.label("Welcome Back!")
         ui.label("Log in to continue your journey with Tankas.")
         with ui.card().classes("w-[30%] flex flex-col items-center shadow-lg"):
-            ui.label("Email or Username")
+            ui.label("Username")
             username = (
                 ui.input(placeholder="enter username")
                 .classes("w-full")

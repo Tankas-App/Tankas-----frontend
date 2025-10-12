@@ -5,6 +5,7 @@ from pages.signin import *
 from pages.signup import *
 from pages.issues import *
 from pages.issue_detail import *
+from pages.issue_confirmation import *
 from pages.warrior import *
 from pages.post_issue import *
 

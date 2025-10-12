@@ -52,9 +52,9 @@ def show_signup_page():
         ui.label("Create your account")
         ui.label("Join our community for a cleaner tomorrow.")
         with ui.card().classes("w-[30%] flex flex-col items-center shadow-lg"):
-            ui.label("Full Name")
+            ui.label("Username")
             username = (
-                ui.input(placeholder="Enter your full name")
+                ui.input(placeholder="Enter your username")
                 .classes("w-full")
                 .props("outlined")
             )
