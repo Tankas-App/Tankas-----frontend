@@ -14,4 +14,4 @@ def show_issue_confirmation():
             
             # Back to issue feed button
             ui.button('Back to Issue Feed', 
-                     on_click=lambda: ui.navigate.to('/issues')).classes('bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg')
+                     on_click=lambda: ui.navigate.to('/issues')).classes("bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg")
