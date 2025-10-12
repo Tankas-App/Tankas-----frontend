@@ -42,15 +42,16 @@ def show_signin_page():
     ui.add_head_html(
         "<script src='https://kit.fontawesome.com/ccba89e5d4.js' crossorigin='anonymous'></script>"
     )
+    ui.add_head_html('<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">')
 
     show_navbar()
 
     with ui.element("div").classes(
-        "w-full h-screen flex flex-col justify-center items-center py-20"
-    ):
-        ui.label("Welcome Back!")
-        ui.label("Log in to continue your journey with Tankas.")
-        with ui.card().classes("w-[30%] flex flex-col items-center shadow-lg"):
+        "w-full h-full flex flex-col justify-center items-center py-20 mt-10"
+    ).style('font-family: "Raleway", serif;'):
+        ui.label("Welcome Back!").classes('text-3xl font-semibold mb-4')
+        ui.label("Log in to continue your journey with Tankas.").classes('text-green font-semibold text-lg mb-4')
+        with ui.card().classes("w-[30%] flex flex-col items-center shadow-lg font-semibold mb-8"):
             ui.label("Username")
             username = (
                 ui.input(placeholder="enter username")
@@ -65,16 +66,16 @@ def show_signin_page():
                 .classes("w-full")
                 .props("outlined")
             )
-            ui.link("Forgot Password?", "#")
+            ui.link("Forgot Password?", "#").classes('text-green no-underline font-semibold')
             _login_btn = ui.button(
                 "Login",
                 on_click=lambda: _login_user(
                     {"username": username.value, "password": password.value}
                 ),
-            )
+            ).props("flat dense no-caps").classes("w-full bg-green text-white py-2")
             # ui.button("Login", on_click= _signin_user(
             #     data={}
             # )).props('flat dense no-caps').classes('w-full')
-        with ui.row():
+        with ui.row().classes('gap-0'):
             ui.label("Don't have an account?")
-            ui.link("Sign Up", "/signup")
+            ui.link("Sign Up", "/signup").classes('text-green no-underline font-semibold')
