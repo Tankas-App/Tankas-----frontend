@@ -11,7 +11,7 @@ from pages.post_issue import *
 from pages.tutorial1 import *
 from pages.tutorial2 import *
 from pages.tutorial3 import *
-from pages.suggest_reward import *
+from pages.tutorial4 import *
 
 app.add_static_files("/assets", "assets")
 
