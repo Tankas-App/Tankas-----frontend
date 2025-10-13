@@ -35,6 +35,8 @@ async def _signup(data):
         return ui.navigate.to("/signin")
     elif response.status_code == 422:
         return ui.notify(message="User already exist!", type="warning")
+    elif response.status_code == 400:
+        return ui.notify(message="User already exist!", type="warning")
 
 
 @ui.page("/signup")
