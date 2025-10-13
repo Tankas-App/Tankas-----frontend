@@ -35,6 +35,8 @@ async def _signup(data):
         return ui.navigate.to("/signin")
     elif response.status_code == 422:
         return ui.notify(message="User already exist!", type="warning")
+    elif response.status_code == 400:
+        return ui.notify(message="User already exist!", type="warning")
 
 
 @ui.page("/signup")
@@ -49,10 +51,10 @@ def show_signup_page():
 
     with ui.element("div").classes(
         "w-full h-full flex flex-col justify-center items-center py-20 mt-10"
-    ).style('font-family: "Raleway", serif;'):
+    ).style('font-family: "Raleway", serif; background-color: #F7FFF7;'):
         ui.label("Create your account").classes('text-3xl font-semibold mb-4')
-        ui.label("Join our community for a cleaner tomorrow").classes('text-green font-semibold text-lg mb-4')
-        with ui.card().classes("w-[30%] flex flex-col items-center shadow-lg font-semibold mb-8"):
+        ui.label("Join our community for a cleaner tomorrow").classes('font-semibold text-lg mb-4').style('color: #2E86AB')
+        with ui.card().classes("w-[30%] flex shadow-lg font-semibold mb-8"):
             ui.label("Username")
             username = (
                 ui.input(placeholder="Enter your username")
@@ -99,8 +101,8 @@ def show_signup_page():
                     ),
                 )
                 .props("flat dense no-caps")
-                .classes("w-full bg-green text-white py-2")
+                .classes("w-full text-white py-2").style('background-color: #007F7C')
             )
         with ui.row().classes('gap-0'):
             ui.label("Already have an account?")
-            ui.link("Sign in", "/signin").classes('text-green no-underline font-semibold')
+            ui.link("Sign in", "/signin").classes('no-underline font-semibold').style('color: #2E86AB')
