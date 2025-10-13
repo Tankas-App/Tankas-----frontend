@@ -1,7 +1,8 @@
 from nicegui import ui
 from components.issue_card import show_issue_card
 
-@ui.page('/issues')
+
+@ui.page("/issues")
 def show_issues():
     ui.query('.nicegui-content').classes('m-0 p-0 gap-0')
     ui.add_head_html(
