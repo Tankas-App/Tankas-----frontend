@@ -340,3 +340,4 @@ COLORS
 #ade6e5ff - Light TEAL
 #2E86AB - BLUE(NCS)
 #0A0A0A - NIGHT
+#f8d50eff - GOLD
