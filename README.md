@@ -335,9 +335,9 @@ LAYOUT:
 
 
 COLORS
-#F7FFF7 - MINT CREAM
-#007F7C - TEAL
-#ade6e5ff - Light TEAL
-#2E86AB - BLUE(NCS)
+#F7FFF7 - MINT CREAM  // background color of pages
+#007F7C - TEAL //buttons, widgets
+#ade6e5ff - Light TEAL //
+#2E86AB - BLUE(NCS)  //header texts
 #0A0A0A - NIGHT
 #f8d50eff - GOLD

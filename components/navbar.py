@@ -11,5 +11,6 @@ def show_navbar():
         with ui.row():
             ui.link('Issue Detail', '/issue_detail').classes('no-underline font-semibold ')
             ui.link('Issue Confirmation', '/issue_confirmation').classes('no-underline font-semibold ')
+            ui.link('Suggest Reward', '/suggest_reward').classes('no-underline font-semibold ')
 
         ui.button(text="Join Now", on_click=lambda: ui.navigate.to('/signup')).props('flat dense no-caps').classes('text-white px-5 py-1 rounded-lg shadow-sm shadow-gray-200 font-semibold').style('background-color: #007F7C')
