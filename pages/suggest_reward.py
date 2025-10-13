@@ -3,11 +3,20 @@ from nicegui import ui
 
 @ui.page("/suggest_reward")
 def show_suggest_reward():
-    with ui.element().style("background-color:#F7FFF7").classes(
-        "w-full min-h-screen flex flex-col justify-center items-center rounded"
+    ui.query(".nicegui-content").classes("m-0 p-0 gap-0")
+    ui.add_head_html(
+        '<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">'
+    )
+
+    with ui.element().style(
+        "font-family:Raleway, serif; background-color:#F7FFF7"
+    ).classes(
+        "w-full min-h-screen flex flex-col justify-center items-center py-20 mt-10"
     ):
-        ui.label("Suggest a Reward").classes("text-4xl font-bold mt-10")
-        ui.label("Got a great idea for a new reward? Let us know").classes("mb-5")
+        ui.label("Suggest a Reward").classes("text-3xl font-semibold mb-4")
+        ui.label("Got a great idea for a new reward? Let us know").classes(
+            "mb-5 text-lg py-2"
+        )
         with ui.card().classes(
             "w-[40%] flex flex-col justify-center items-center rounded-3xl mb-8 px-10"
         ):
@@ -47,4 +56,4 @@ def show_suggest_reward():
             )
             ui.button("Submit Suggestion").props("flat dense no-caps").style(
                 "background-color:#007F7C"
-            ).classes("w-full  text-black text-lg  rounded-xl py-3")
+            ).classes("w-full  text-white rounded-xl py-2")
