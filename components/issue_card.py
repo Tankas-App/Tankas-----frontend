@@ -1,7 +1,7 @@
 from nicegui import ui
 
 
-def show_issue_card():
+def show_issue_card(issue):
     with ui.card().classes('flex flex-col justify-center items-center w-full'):
         with ui.element('div').classes('w-full flex flex-row justify-between items-center text-xs mb-4'):
             with ui.column().classes('w-[70%]'):

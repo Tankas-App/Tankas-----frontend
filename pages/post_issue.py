@@ -1,5 +1,35 @@
-from nicegui import ui
+from nicegui import ui, app
+import requests
+from components.navbar import show_navbar
 
+from utils.api import base_url
+
+_issue_image = None
+
+def _handle_image_upload(issue):
+    global _issue_image
+    _issue_image = issue.content
+
+# function to create a post event
+def _post_issue(data, files):
+    response = requests.post(url=f"{base_url}/api/issues", data=data, files=files, headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},)
+    print(response.status_code, response.content)
+    if response.status_code == 200:
+        json_data = response.json()
+        issue = json_data["data"]
+        ui.notify(
+            message= "Issues added successfully!",
+            type="positive")
+        return ui.navigate.to("/issue_confirmation")
+    elif response.status_code == 422:
+        return ui.notify(message="Please ensure all inputs are filled!", type="negative")
+    elif response.status_code == 401:
+        return ui.navigate.to("/signin")
+    elif response.status_code == 403:
+        return ui.notify(
+            message="Access denied!",
+            type="info",
+        )
 
 @ui.page("/post_issue")
 def show_warrior():
@@ -9,20 +39,22 @@ def show_warrior():
         '<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">'
     )
 
+    show_navbar()
+
     with ui.element().style(
         "font-family: Raleway, serif; background-color:#F7FFF7"
     ).classes(
         "w-full min-h-screen flex flex-col justify-center items-center py-20 mt-10"
     ):
-        ui.label("Report a New Issue").classes("text-3xl font-semibold mb-4")
+        ui.label("Report a New Issue").classes("text-3xl font-semibold mb-2")
 
         with ui.card().classes(
             "w-[30%] flex flex-col justify-center items-center mt-8 mb-8"
         ):
-            ui.input(label="Title", placeholder="enter your issue title").props(
+            title = ui.input(label="Title", placeholder="enter your issue title").props(
                 "outlined"
             ).classes("w-full bg-white")
-            ui.textarea(
+            description = ui.textarea(
                 "Description", placeholder="describe your issue in detail..."
             ).props("outlined").classes("w-full bg-white")
             with ui.row().classes("w-full flex flex-row justify-around items-center"):
@@ -81,9 +113,17 @@ def show_warrior():
                         "value",
                         lambda v: f"Difficulty: {difficulty_map.get(int(v), 'Unknown')}",
                     )
-            ui.upload(label="Upload photos", auto_upload=True, multiple=True).props(
+            ui.upload(label="Upload photos", auto_upload=True, multiple=True, on_upload=_handle_image_upload).props(
                 "color=teal-7"
             ).classes("w-full")
-            ui.button(text="Submit Report").props("flat dense no-caps").style(
+            ui.button(text="Submit Report", on_click=lambda: _post_issue(
+                data={
+                    "title": title.value,
+                    "description": description.value,
+                    "latitude": latitude.value,
+                    "longitude": longitude.value
+                },
+                files={"picture_url": _issue_image}
+            )).props("flat dense no-caps").style(
                 "background-color:#007F7C"
             ).classes("w-full text-white py-2")
