@@ -10,13 +10,15 @@ def _handle_image_upload(issue):
     global _issue_image
     _issue_image = issue.content
 
-# function to create a post event
+# function to create a post issue
 def _post_issue(data, files):
+    print(data)
     response = requests.post(url=f"{base_url}/api/issues", data=data, files=files, headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},)
     print(response.status_code, response.content)
     if response.status_code == 200:
-        json_data = response.json()
-        issue = json_data["data"]
+        # json_data = response.json()
+        # print(json_data)
+        # issue = json_data["data"]
         ui.notify(
             message= "Issues added successfully!",
             type="positive")
@@ -74,7 +76,7 @@ def show_warrior():
             with ui.row().classes("w-full flex flex-row justify-around items-center"):
                 with ui.element("div"):
                     # ui.label("Priority:")
-                    slider = ui.slider(min=1, max=3, value=1, step=1).props(
+                    priority_slider = ui.slider(min=1, max=3, value=1, step=1).props(
                         "color=teal-4"
                     )
                     # ui.label().bind_text_from(slider, "value")
@@ -88,14 +90,14 @@ def show_warrior():
 
                     # Bind slider value to display the corresponding text
                     priority_label.bind_text_from(
-                        slider,
+                        priority_slider,
                         "value",
                         lambda v: f"Priority: {priority_map.get(int(v), 'Unknown')}",
                     )
 
                 with ui.element("div"):
                     # ui.label("Difficulty:")
-                    slider = ui.slider(min=1, max=3, value=1, step=1).props(
+                    difficulty_slider = ui.slider(min=1, max=3, value=1, step=1).props(
                         "color=teal-4"
                     )
                     # ui.label().bind_text_from(slider, "value")
@@ -109,7 +111,7 @@ def show_warrior():
 
                     # Bind slider value to display the corresponding text
                     difficulty_label.bind_text_from(
-                        slider,
+                        difficulty_slider,
                         "value",
                         lambda v: f"Difficulty: {difficulty_map.get(int(v), 'Unknown')}",
                     )
@@ -121,7 +123,9 @@ def show_warrior():
                     "title": title.value,
                     "description": description.value,
                     "latitude": latitude.value,
-                    "longitude": longitude.value
+                    "longitude": longitude.value,
+                    "difficulty": difficulty_map[difficulty_slider.value].lower(),
+                    "priority": priority_map[priority_slider.value].lower()
                 },
                 files={"picture_url": _issue_image}
             )).props("flat dense no-caps").style(
