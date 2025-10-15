@@ -24,10 +24,11 @@ def show_issues():
                 ui.select(options=["All", "High", "Medium", "Low"], label="Priority", value="All").props('outlined').classes('w-[48%]').style('background-color: #F7FFF7')
                 ui.select(options=["All", "High", "Medium", "Easy"], label="Difficulty", value="All").props('outlined').classes('w-[48%]').style('background-color: #F7FFF7')
         with ui.grid(columns=3, rows=4).classes('w-[90%] px-5 gap-4'):
-                for i in range(6):
-                    show_issue_card()
-                # response = requests.get(url=f"{base_url}/api/issues?limit=0")
-                # print(response.status_code, response.content)
-                # json_data = response.json()
-                # for issue in json_data("data"):
-                #     show_issue_card(issue)
+                # for i in range(6):
+                #     show_issue_card()
+                response = requests.get(url=f"{base_url}/api/issues")
+                print(response.status_code, response.content)
+                json_data = response.json()
+                # print(f"This is the Json file : {json_data}")
+                for issue in json_data:
+                    show_issue_card(issue)

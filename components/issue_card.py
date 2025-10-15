@@ -1,11 +1,11 @@
 from nicegui import ui
 
 
-def show_issue_card():
+def show_issue_card(issue):
     with ui.card().classes('flex flex-col justify-center items-center w-full'):
         with ui.element('div').classes('w-full flex flex-row justify-between items-center text-xs mb-4'):
             with ui.column().classes('w-[70%]'):
-                ui.label("Title (Overflowing Trash Bin)").classes('font-bold text-sm')
+                ui.label(text=issue["title"]).classes('font-bold text-sm')
                 ui.label("Location (Labone Juntion)")
                 with ui.row().classes('flex flex-row items-center gap-1'):
                     ui.icon('star').style('color: #2E86AB')
