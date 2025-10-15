@@ -1,7 +1,6 @@
 from nicegui import ui, app
 import requests
 from components.navbar import show_navbar
-
 from utils.api import base_url
 
 _issue_image = None
@@ -18,7 +17,6 @@ def _post_issue(data, files):
     if response.status_code == 200:
         # json_data = response.json()
         # print(json_data)
-        # issue = json_data["data"]
         ui.notify(
             message= "Issues added successfully!",
             type="positive")
@@ -34,7 +32,7 @@ def _post_issue(data, files):
         )
 
 @ui.page("/post_issue")
-def show_warrior():
+def show_post_issue():
     ui.query(".nicegui-row").classes("flex-nowrap")
     ui.query(".nicegui-content").classes("m-0 p-0 gap-0")
     ui.add_head_html(
