@@ -7,7 +7,7 @@ def show_issue_card(issue):
     )
     ui.add_head_html('<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">')
 
-    with ui.card().on(type="click", handler=lambda: ui.navigate.to(f"/api/issues?id={issue["id"]}")).classes('flex flex-col justify-center items-center w-full cursor-pointer').style('font-family: "Raleway", serif;'):
+    with ui.card().on(type="click", handler=lambda: ui.navigate.to(f"/issue_detail?id={issue["id"]}")).classes('flex flex-col justify-center items-center w-full cursor-pointer').style('font-family: "Raleway", serif;'):
         with ui.element('div').classes('w-full flex flex-row justify-between items-center text-xs mb-4'):
             with ui.column().classes('w-[70%]'):
                 ui.label(text=issue["title"]).classes('font-bold text-sm')

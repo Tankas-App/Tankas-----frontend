@@ -33,7 +33,7 @@ async def _login_user(data):
     if response.status_code == 200:
         json_data = response.json()
         app.storage.user["access_token"] = json_data["access_token"]
-        return ui.navigate.to("/issues")
+        return ui.navigate.to("/dashboard")
 
 
 @ui.page("/signin")
