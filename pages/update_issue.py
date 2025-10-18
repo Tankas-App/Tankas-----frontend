@@ -12,7 +12,7 @@ def _handle_image_upload(issue):
 
 
 # function to create a post issue
-def _post_issue(data, files):
+def _update_issue(data, files):
     print(data)
     response = requests.post(
         url=f"{base_url}/api/issues",
