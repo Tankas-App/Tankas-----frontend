@@ -25,6 +25,20 @@ def show_sidebar():
                      on_click=lambda: ui.navigate.to('/rewards'), icon='leaderboard').classes('w-full text-balck py-3 px-4 hover:text-lg').props("flat dense no-caps")
             
             ui.button('Suggest Reward', 
+                     on_click=lambda: ui.navigate.to('/suggest_reward')).classes('w-full text-white py-3 px-4').style('background-color: #007F7C; border: none;').props("flat dense no-caps")
+            
+            ui.button('Profile', 
+                     on_click=lambda: ui.navigate.to('/profile')).classes('w-full text-white py-3 px-4').style('background-color: #007F7C; border: none;').props("flat dense no-caps")
+        
+        # User profile section at bottom
+        with ui.column().classes('w-full mt-8'):
+            with ui.row().classes('items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-gray-200').on('click', lambda: ui.navigate.to('/profile')):
+                ui.avatar('SC').classes('text-white').style('background-color: #007F7C')
+                 
+                # User info
+                with ui.column().classes('flex-1'):
+                    ui.label('Sophia Clark').classes('font-medium text-gray-900')
+                    ui.label('Level 5 • 1200 pts').classes('text-sm').style('color: #007F7C')
                      on_click=lambda: ui.navigate.to('/suggest_reward'), icon='emoji_events').classes('w-full text-balck py-3 px-4 hover:text-lg').props("flat dense no-caps")
         
         # User profile section at bottom

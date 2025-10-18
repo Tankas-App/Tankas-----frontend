@@ -1,8 +1,10 @@
 from nicegui import ui
 from components.sidebar import show_sidebar
+from components.user_profile import show_user_profile
 
 @ui.page('/dashboard')
 def show_dashboard():
+    
     ui.query(".nicegui-row").classes("flex-nowrap")
 
     with ui.element("main").classes("w-full flex flex-row justify-between items-center"):
