@@ -7,6 +7,20 @@ from components.sidebar import show_sidebar
 from components.user_profile import *
 from pages.profile import *
 from pages.dashboard import *
+from pages.issues import *
+from pages.issue_detail import *
+from pages.issue_confirmation import *
+from pages.warrior import *
+from pages.post_issue import *
+from pages.tutorial1 import *
+from pages.tutorial2 import *
+from pages.tutorial3 import *
+from pages.tutorial4 import *
+from pages.suggest_reward import *
+from pages.update_issue import *
+from pages.warrior import *
+from pages.warrior1 import *
+from pages.rewards import *
 
 app.add_static_files("/assets", "assets")
 

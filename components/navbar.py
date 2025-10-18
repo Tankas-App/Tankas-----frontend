@@ -14,4 +14,6 @@ def show_navbar():
             ui.link('Suggest Reward', '/suggest_reward').classes('no-underline font-semibold ')
             ui.link('Post Issue', '/post_issue').classes('no-underline font-semibold ')
 
-        ui.button(text="Join Now", on_click=lambda: ui.navigate.to('/signup')).props('flat dense no-caps').classes('text-white px-5 py-1 rounded-lg shadow-sm shadow-gray-200 font-semibold').style('background-color: #007F7C')
+        with ui.row().classes('gap-0'):
+            ui.button(text="Join Now", on_click=lambda: ui.navigate.to('/signup')).props('flat dense no-caps').classes('text-white px-5 py-1 shadow-sm shadow-gray-200 font-semibold').style('background-color: #007F7C')
+            ui.button(text="Login", on_click=lambda: ui.navigate.to('/signin')).props('flat dense no-caps').classes('text-white px-5 py-1 shadow-sm shadow-gray-200 font-semibold').style('background-color: #ade6e5ff')

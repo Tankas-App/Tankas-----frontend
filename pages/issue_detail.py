@@ -19,7 +19,7 @@ def show_issue_detail():
     issue_id = ui.context.client.request.query_params.get("id")
     try:
         response = requests.get(url=f"{base_url}/api/issues/{issue_id}")
-        print(response.status_code, response.content)
+        # print(response.st atus_code, response.content)
         if response.status_code == 200:
             json_data = response.json()
             print(json_data)

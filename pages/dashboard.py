@@ -8,35 +8,50 @@ def show_dashboard():
     ui.query(".nicegui-row").classes("flex-nowrap")
 
     with ui.element("main").classes("w-full flex flex-row justify-between items-center"):
-        with ui.row().classes('w-[20%] h-screen'):
+        with ui.row().classes('w-[20%]'):
             show_sidebar()
-        # Main content area (right)
-        with ui.column().classes(
-            "flex-1 flex flex-col h-full overflow-y-auto p-8"
-        ):
-            # Top: user profile section
-            with ui.row().classes(
-                "w-full justify-between items-center mb-6 pb-4 border-b border-gray-200"
-            ):
-                show_user_profile()
+        with ui.column().classes('w-[80%]'):
+            with ui.element('div').classes('w-full px-5'):
+                with ui.column().classes('flex-1 p-10 overflow-auto'):
+                # Header
+                    ui.label('Welcome back, User!').classes('text-3xl font-bold mb-6')
 
-            # Main content
-            with ui.column().classes("w-full flex-1 mt-4 z-50 m-0 p-0 gap-0"):
-                ui.label('Dashboard').classes('text-4xl font-bold mb-2 text-blue-600')
-                ui.label('Welcome to your dashboard area.').classes('text-gray-600 mb-8')
+                # Top Cards
+                with ui.row().classes('gap-6 mb-6 flex flex-col sm:flex-row'):
+                    with ui.card().classes('flex-1 p-6 rounded-xl shadow-sm border border-gray-200 bg-white'):
+                        ui.label('Pending Issues').classes('text-gray-500')
+                        ui.label('5').classes('text-3xl font-bold mt-2')
+                    with ui.card().classes('flex-1 p-6 rounded-xl shadow-sm border border-gray-200 bg-white'):
+                        ui.label('Current Points').classes('text-gray-500')
+                        ui.label('1,200').classes('text-3xl font-bold mt-2')
 
-                # Example content section
-                with ui.row().classes(' w-full gap-4'):
-                    with ui.card().classes(" w-2/3 shadow-lg p-6 rounded-2xl bg-teal-100"):
-                        with ui.row().classes('items-center'):
-                            ui.label('1200').classes('text-lg font-bold').style('color: #007F7C')
-                            ui.label('Points').classes('text-xs text-gray-500')
-                    with ui.card().classes(" w-2/3 shadow-lg p-6 rounded-2xl bg-teal-100"):
-                        with ui.row().classes('items-center'):
-                            ui.label('35').classes('text-lg font-bold').style('color: #007F7C')
-                            ui.label('Tasks').classes('text-xs text-gray-500')
-                    with ui.card().classes("w-2/3 shadow-lg p-6 rounded-2xl bg-teal-100"):
-                        with ui.row().classes('items-center'):
-                            ui.label('15').classes('text-lg font-bold').style('color: #007F7C')
-                            ui.label('Badges').classes('text-xs text-gray-500')
-                
+                # Buttons
+                with ui.row().classes('gap-4 mb-8 flex flex-col sm:flex-row'):
+                    ui.button('Report a New Issue').classes(
+                        'flex-1 bg-[#00C853] text-white font-semibold rounded-full py-3 hover:bg-[#00b24a]'
+                    )
+                    ui.button('Volunteer Now').classes(
+                        'flex-1 bg-[#E6F3E8] text-gray-700 font-semibold rounded-full py-3 hover:bg-[#DDEFE0]'
+                    )
+
+                # Progress Section
+                with ui.card().classes('p-6 rounded-xl shadow-sm border border-gray-200 bg-white mb-8'):
+                    with ui.row().classes('justify-between mb-2'):
+                        ui.label('Level 5').classes('font-semibold')
+                        ui.label('Next Reward: Eco–Warrior Badge').classes('text-gray-600 text-sm')
+                    ui.linear_progress(value=0.45).props('color=green').classes('h-2 rounded-full')
+                    ui.label('450 / 1000 XP').classes('text-right text-gray-500 text-sm mt-2')
+
+                # Recent Activity
+                ui.label('Recent Activity').classes('text-xl font-bold mb-4')
+                activities = [
+                    ('You reported a clogged drain on Main Street.', '2 hours ago'),
+                    ('You volunteered for the park cleanup event.', '1 day ago'),
+                    ("Issue 'Broken Streetlight' was resolved. +50 points!", '3 days ago'),
+                ]
+                for text, time in activities:
+                    with ui.card().classes('p-4 mb-3 rounded-xl border border-gray-200 bg-white flex flex-col gap-1'):
+                        with ui.row().classes('gap-2 items-center'):
+                            ui.icon('info').classes('text-[#00C853]')
+                            ui.label(text).classes('text-gray-800')
+                        ui.label(time).classes('text-gray-500 text-sm ml-6')
