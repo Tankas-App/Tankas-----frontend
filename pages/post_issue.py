@@ -1,24 +1,36 @@
 from nicegui import ui, app
 import requests
 from components.navbar import show_navbar
-
 from utils.api import base_url
+import io
 
 _issue_image = None
 
-def _handle_image_upload(issue):
+# async def _handle_image_upload(issue):
+#     global _issue_image
+#     # _issue_image = issue.content
+#     file_bytes = await issue.file.read()  
+#     _issue_image = (issue.name, io.BytesIO(file_bytes), issue.type)
+
+async def _handle_image_upload(issue):
     global _issue_image
-    _issue_image = issue.content
+
+    # Get the file path
+    temp_path = issue.file._path
+    with open(temp_path, "rb") as f:
+        file_bytes = f.read()
+
+    _issue_image = (issue.file.name, io.BytesIO(file_bytes), issue.file.content_type)
+    print(f"Uploaded: {issue.file.name}, type: {issue.file.content_type}, size: {len(file_bytes)} bytes")
 
 # function to create a post issue
 def _post_issue(data, files):
-    print(data)
+    print(files)
     response = requests.post(url=f"{base_url}/api/issues", data=data, files=files, headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},)
     print(response.status_code, response.content)
     if response.status_code == 200:
         # json_data = response.json()
         # print(json_data)
-        # issue = json_data["data"]
         ui.notify(
             message= "Issues added successfully!",
             type="positive")
@@ -34,7 +46,7 @@ def _post_issue(data, files):
         )
 
 @ui.page("/post_issue")
-def show_warrior():
+def show_post_issue():
     ui.query(".nicegui-row").classes("flex-nowrap")
     ui.query(".nicegui-content").classes("m-0 p-0 gap-0")
     ui.add_head_html(
@@ -115,7 +127,7 @@ def show_warrior():
                         "value",
                         lambda v: f"Difficulty: {difficulty_map.get(int(v), 'Unknown')}",
                     )
-            ui.upload(label="Upload photos", auto_upload=True, multiple=True, on_upload=_handle_image_upload).props(
+            ui.upload(label="Upload photos", auto_upload=True, on_upload= _handle_image_upload).props(
                 "color=teal-7"
             ).classes("w-full")
             ui.button(text="Submit Report", on_click=lambda: _post_issue(
@@ -127,7 +139,7 @@ def show_warrior():
                     "difficulty": difficulty_map[difficulty_slider.value].lower(),
                     "priority": priority_map[priority_slider.value].lower()
                 },
-                files={"picture_url": _issue_image}
+                files={"picture": _issue_image}
             )).props("flat dense no-caps").style(
                 "background-color:#007F7C"
             ).classes("w-full text-white py-2")
