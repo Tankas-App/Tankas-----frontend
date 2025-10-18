@@ -11,8 +11,8 @@ def homepage():
     
     show_navbar()
 
-    with ui.element('main').classes('w-full h-screen flex flex-col justify-center items-center bg-[url("/assets/hero.jpg")] bg-cover bg-center').classes('').style('font-family: "Raleway", serif; color: #2E86AB'):
-        with ui.element('div').classes('text-white bg-black/30 w-full h-full flex flex-col justify-center items-center'):
+    with ui.element('main').classes('w-full h-screen flex flex-col justify-center items-center bg-[url("/assets/wom.jpg")] bg-cover bg-center').classes('').style('font-family: "Raleway", serif; color: #2E86AB'):
+        with ui.element('div').classes('text-white bg-black/50 w-full h-full flex flex-col justify-center items-center'):
             ui.label("Clean Together, Thrive Together").style('font-family: "Archivo Black", sans-serif;').classes('text-6xl mb-8')
             ui.label("Join Tankas, the gamified sanitation app that turns community improvement into a fun, rewarding adventure. Earn points, badges, and recognition for making your neighborhood cleaner and greener.").classes('w-[40%] text-lg text-gray-300 mb-8')
             ui.button(text="Get Started", on_click=lambda: ui.navigate.to('/tutorial1')).props('flat dense no-caps').classes('text-white px-12 py-3 rounded-lg shadow-sm font-bold text-lg').style('background-color: #007F7C')

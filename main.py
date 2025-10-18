@@ -13,7 +13,7 @@ from pages.tutorial2 import *
 from pages.tutorial3 import *
 from pages.tutorial4 import *
 from pages.suggest_reward import *
-from components.sidebar import show_sidebar
+from pages.rewards import *
 
 app.add_static_files("/assets", "assets")
 
