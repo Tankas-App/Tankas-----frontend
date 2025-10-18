@@ -64,7 +64,7 @@ def show_issue_detail():
                     ui.button("Volunteer").props("flat dense no-caps").classes(
                         "w-[50%] font-semibold text-white text-lg rounded-xl py-3"
                     ).style("background-color:#007F7C")
-                    ui.button("Submit Fix").props("flat dense no-caps").classes(
+                    ui.button("Submit Fix", on_click=lambda: ui.navigate.to('/work_submission1')).props("flat dense no-caps").classes(
                         "w-[50%] font-semibold text-lg rounded-xl py-3"
                     ).style("background-color:#ade6e5ff; color: #2E86AB")
 

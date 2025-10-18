@@ -17,6 +17,8 @@ from pages.update_issue import *
 from pages.warrior import *
 from pages.warrior1 import *
 from pages.rewards import *
+from pages.work_submission1 import *
+from pages.work_submission2 import *
 
 app.add_static_files("/assets", "assets")
 
