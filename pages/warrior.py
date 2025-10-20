@@ -1,4 +1,5 @@
 from nicegui import ui
+from components.footer import show_footer
 
 
 @ui.page("/warrior")
@@ -7,29 +8,32 @@ def show_warrior():
     ui.query(".nicegui-content").classes("p-0 m-0 gap-0")
 
     ui.add_head_html(
-        '<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">'
+        "<script src='https://kit.fontawesome.com/ccba89e5d4.js' crossorigin='anonymous'></script>"
     )
 
+    ui.add_head_html('<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Gwendolyn:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lavishly+Yours&family=Raleway:ital,wght@0,100..900;1,100..900&family=Stoke:wght@300;400&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">')
+    
+
     # ====== HEADER ======
-    with ui.header().classes(
-        "justify-between items-center px-8 py-6 bg-white shadow-sm"
-    ):
-        with ui.row().classes("items-center gap-3"):
-            ui.image("/assets/Logo.png").classes("h-10 w-auto")
-        with ui.row().classes("items-center gap-6"):
-            ui.link("Dashboard", "/dashboard").classes("no-underline text-lg")
-            ui.link("Report an Issue", "/post_issue").classes("no-underline text-lg")
-            ui.button("Volunteer", color="teal-600").props("no-caps").classes(
-                "rounded-full px-4"
-            )
-            ui.button("My Profile", color="teal-600").props("no-caps").classes(
-                "rounded-full px-4"
-            )
-            ui.avatar("https://randomuser.me/api/portraits/men/11.jpg")
+    # with ui.header().classes(
+    #     "justify-between items-center px-8 py-6 bg-white shadow-sm"
+    # ):
+    #     with ui.row().classes("items-center gap-3"):
+    #         ui.image("/assets/Logo.png").classes("h-10 w-auto")
+    #     with ui.row().classes("items-center gap-6"):
+    #         ui.link("Dashboard", "/dashboard").classes("no-underline text-lg")
+    #         ui.link("Report an Issue", "/post_issue").classes("no-underline text-lg")
+    #         ui.button("Volunteer", color="teal-600").props("no-caps").classes(
+    #             "rounded-full px-4"
+    #         )
+    #         ui.button("My Profile", color="teal-600").props("no-caps").classes(
+    #             "rounded-full px-4"
+    #         )
+    #         ui.avatar("https://randomuser.me/api/portraits/men/11.jpg")
 
     with ui.element().style(
         "font-family: Raleway, serif; background-color:#F7FFF7"
-    ).classes("w-full flex flex-col items-center"):
+    ).classes("w-full flex flex-col items-center py-20").style('font-family: "Raleway", serif; background-color:#F7FFF7;'):
 
         with ui.column().classes("w-[80%] mx-auto text-left mt-10 mb-6"):
             ui.label("Our Warriors in Action").classes(
@@ -37,16 +41,16 @@ def show_warrior():
             )
             ui.label(
                 "See the incredible impact our community is making together!"
-            ).classes("text-green-600 text-md mb-6")
+            ).classes("text-teal-600 text-lg mb-6")
             with ui.row().classes("flex-wrap gap-3 mb-6"):
-                ui.button("All", color="teal-600").props("no-outline no-caps")
-                ui.button("In Progress", color="teal-400").props("no-outline no-caps")
+                ui.button("All", color="teal-600").props("no-outline no-caps").classes('text-white')
+                ui.button("In Progress", color="teal-400").props("no-outline no-caps").classes('text-white')
                 ui.button("Recently Completed", color="teal-600").props(
                     "no-outline no-caps"
-                )
+                ).classes('text-white')
                 ui.button("Highest Impact", color="teal-600").props(
                     "no-outline no-caps"
-                )
+                ).classes('text-white')
 
         # Cards Section
         with ui.row().classes(
@@ -54,7 +58,7 @@ def show_warrior():
         ):
             # LEFT COLUMN
             with ui.column().classes("w-full lg:w-[60%] flex flex-col gap-6"):
-                with ui.card().style("background-color:#ade6e5ff;").classes(
+                with ui.card().style("background-color:white;").classes(
                     "w-full flex flex-row items-center gap-4 p-4 rounded-3xl shadow-xl"
                 ):
                     ui.image(
@@ -86,7 +90,7 @@ def show_warrior():
                                 "mt-2 rounded-full px-3 py-1 text-white text-sm bg-teal-600"
                             )
 
-                with ui.card().style("background-color:#ade6e5ff;").classes(
+                with ui.card().style("background-color:white;").classes(
                     "w-full flex flex-row items-center gap-4 p-4 rounded-3xl shadow-xl"
                 ):
                     ui.image(
@@ -114,16 +118,17 @@ def show_warrior():
 
             # RIGHT COLUMN
             with ui.column().classes("w-full lg:w-1/3 flex flex-col gap-6"):
-                with ui.card().style("background-color:#ade6e5ff;").classes(
+                with ui.card().style("background-color:white;").classes(
                     "w-full p-4 rounded-3xl shadow-xl"
                 ):
                     ui.label("Share the Impact!").classes("font-semibold text-lg mb-2")
                     with ui.row().classes("gap-4 justify-center"):
-                        ui.button(icon="facebook", color="blue").props("flat round")
-                        ui.button(icon="twitter", color="skyblue").props("flat round")
-                        ui.button(icon="instagram", color="pink").props("flat round")
+                        ui.html('<i class="fa-brands fa-facebook"></i>', sanitize=False).classes('text-xl  cursor-pointer')
+                        ui.html('<i class="fa-brands fa-x-twitter"></i>', sanitize=False).classes('text-xl  cursor-pointer')
+                        ui.html('<i class="fa-brands fa-instagram"></i>', sanitize=False).classes('text-xl  cursor-pointer')
+                        ui.html('<i class="fa-brands fa-whatsapp"></i>', sanitize=False).classes('text-xl  cursor-pointer')
 
-                with ui.card().style("background-color:#ade6e5ff;").classes(
+                with ui.card().style("background-color:white;").classes(
                     "w-full p-4 rounded-3xl shadow-xl"
                 ):
                     ui.label("Top Warriors This Week").classes(
@@ -145,13 +150,4 @@ def show_warrior():
                             ui.avatar("https://randomuser.me/api/portraits/men/40.jpg")
                             ui.label("Mike T. — 760 Impact").classes("text-sm")
 
-    #  FOOTER
-    with ui.footer().classes(
-        "w-full bg-teal-100 text-center justify-center py-6 mt-10"
-    ):
-        ui.label(
-            "© 2025 Tankas App. Let’s make our community cleaner, together."
-        ).classes("text-sm text-gray-600")
-        ui.label("Report an Issue  •  Share on Social").classes(
-            "text-xs text-gray-500 mt-1"
-        )
+    show_footer()
