@@ -34,7 +34,7 @@ def show_dashboard():
 
 
     with ui.element("main").classes("w-full flex flex-row justify-between items-center"):
-        with ui.row().classes('w-[20%]'):
+        with ui.row().classes('w-[20%]').style('font-family: "Raleway", serif; background-color:#F7FFF7;'):
             show_sidebar()
         
         with ui.column().classes('w-[80%]'):
@@ -86,4 +86,5 @@ def show_dashboard():
                             ui.label(time).classes('text-gray-500 text-sm ml-6')
             else:
                 # 4. Fallback UI if the issue data failed to load
-                ui.label("User details not found.").classes("text-xl text-red-600")
+                with ui.element("main").classes("w-full flex justify-center items-center"):
+                    ui.label("User details not found.").classes("text-center text-xl text-red-600")

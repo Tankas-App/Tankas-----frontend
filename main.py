@@ -18,17 +18,10 @@ from pages.warrior import *
 from pages.warrior1 import *
 from pages.rewards import *
 from pages.work_submission1 import *
-from pages.work_submission2 import *
+from pages.review_submission import *
+from pages.volunteer import *
 
 app.add_static_files("/assets", "assets")
 
-# Test page with sidebar
-# @ui.page('/sidebar_test')
-# def sidebar_test_page():
-#     with ui.row().classes('w-full h-screen'):
-#         show_sidebar()
-#         with ui.column().classes('flex-1 p-8'):
-#             ui.label('Main Content Area').classes('text-3xl font-bold mb-4')
-#             ui.label('This is a test page showing the sidebar in action.').classes('text-gray-600')
 
 ui.run(title="TankasApp", storage_secret="qrackhydrarionsydnorhannah")

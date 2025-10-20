@@ -41,7 +41,7 @@ def show_issue_detail():
         # ):
         if issue:
             with ui.element("div").classes(
-                f"w-[70%] h-96 flex flex-col  items-center bg-[url({issue["picture_url"]})] bg-cover bg-center rounded-xl"
+                f"w-[50%] h-[516px] flex flex-col  items-center bg-[url({issue["picture_url"]})] bg-cover bg-center rounded-xl"
             ):
                 with ui.element('div').classes('w-full p-2'):
                     ui.button("Back", on_click=lambda: ui.navigate.back()).props(
@@ -50,18 +50,22 @@ def show_issue_detail():
                 # ui.image("/assets/litter.png").classes(
                 #     "w-full h-full object-cover rounded"
                 # )
-            with ui.element("div").classes("w-[70%] h-[50%] flex flex-col px-5 py-10"):
+            with ui.element("div").classes("w-[50%] h-[50%] flex flex-col px-5 py-10"):
                 with ui.column():
                     ui.label(text=issue["title"]).classes("text-3xl  mt-4 font-bold").style(
                         "color: #2E86AB"
                     )
                     ui.label(text=issue["description"]).classes("text-lg")
-                    ui.label(text=issue["difficulty"]).classes("text-lg font-semibold")
-                    ui.label(text=issue["priority"]).classes("text-lg font-semibold ")
+                    with ui.row().classes():
+                        ui.label("Difficulty: ").classes("text-lg font-semibold")
+                        ui.label(text=issue["difficulty"]).classes("text-lg font-semibold text-gray-500")
+                    with ui.row().classes():
+                        ui.label("Priority: ").classes("text-lg font-semibold")
+                        ui.label(text=issue["priority"]).classes("text-lg font-semibold text-gray-500")
                 with ui.row().classes(
                     "w-full flex flex-row justify-between items-center py-5 mt-8"
                 ):
-                    ui.button("Volunteer").props("flat dense no-caps").classes(
+                    ui.button("Volunteer", on_click=lambda: ui.navigate.to('/volunteer')).props("flat dense no-caps").classes(
                         "w-[50%] font-semibold text-white text-lg rounded-xl py-3"
                     ).style("background-color:#007F7C")
                     ui.button("Submit Fix", on_click=lambda: ui.navigate.to('/work_submission1')).props("flat dense no-caps").classes(
