@@ -26,11 +26,11 @@ def show_issue_detail():
             issue = json_data
 
         else:
-                # Add a visual notification if the API call fails
-                ui.notify(f'Error fetching issue: {response.status_code}', type='negative')
+            # Add a visual notification if the API call fails
+            ui.notify(f"Error fetching issue: {response.status_code}", type="negative")
 
     except requests.exceptions.RequestException as e:
-        ui.notify(f'Network error: {e}', type='negative')
+        ui.notify(f"Network error: {e}", type="negative")
 
     with ui.element().classes(
         "w-full h-full flex flex-col justify-center items-center rounded py-20"
@@ -43,35 +43,50 @@ def show_issue_detail():
             with ui.element("div").classes(
                 f"w-[50%] h-[516px] flex flex-col  items-center bg-[url({issue["picture_url"]})] bg-cover bg-center rounded-xl"
             ):
-                with ui.element('div').classes('w-full p-2'):
+                with ui.element("div").classes("w-full p-2"):
                     ui.button("Back", on_click=lambda: ui.navigate.back()).props(
                         "flat dense no-caps"
-                    ).classes('bg-gray-700 text-white text-sm font-semibold px-4')
+                    ).classes("bg-gray-700 text-white text-sm font-semibold px-4")
                 # ui.image("/assets/litter.png").classes(
                 #     "w-full h-full object-cover rounded"
                 # )
             with ui.element("div").classes("w-[50%] h-[50%] flex flex-col px-5 py-10"):
                 with ui.column():
-                    ui.label(text=issue["title"]).classes("text-3xl  mt-4 font-bold").style(
-                        "color: #2E86AB"
-                    )
+                    ui.label(text=issue["title"]).classes(
+                        "text-3xl  mt-4 font-bold"
+                    ).style("color: #2E86AB")
                     ui.label(text=issue["description"]).classes("text-lg")
                     with ui.row().classes():
                         ui.label("Difficulty: ").classes("text-lg font-semibold")
-                        ui.label(text=issue["difficulty"]).classes("text-lg font-semibold text-gray-500")
+                        ui.label(text=issue["difficulty"]).classes(
+                            "text-lg font-semibold text-gray-500"
+                        )
                     with ui.row().classes():
                         ui.label("Priority: ").classes("text-lg font-semibold")
-                        ui.label(text=issue["priority"]).classes("text-lg font-semibold text-gray-500")
+                        ui.label(text=issue["priority"]).classes(
+                            "text-lg font-semibold text-gray-500"
+                        )
                 with ui.row().classes(
                     "w-full flex flex-row justify-between items-center py-5 mt-8"
                 ):
-                    ui.button("Volunteer", on_click=lambda: ui.navigate.to('/volunteer')).props("flat dense no-caps").classes(
+                    ui.button(
+                        "Volunteer", on_click=lambda: ui.navigate.to("/volunteer")
+                    ).props("flat dense no-caps").classes(
                         "w-[50%] font-semibold text-white text-lg rounded-xl py-3"
-                    ).style("background-color:#007F7C")
-                    ui.button("Submit Fix", on_click=lambda: ui.navigate.to('/work_submission1')).props("flat dense no-caps").classes(
+                    ).style(
+                        "background-color:#007F7C"
+                    )
+                    ui.button(
+                        "Submit Fix",
+                        on_click=lambda: ui.navigate.to("/work_submission1"),
+                    ).props("flat dense no-caps").classes(
                         "w-[50%] font-semibold text-lg rounded-xl py-3"
-                    ).style("background-color:#ade6e5ff; color: #2E86AB")
+                    ).style(
+                        "background-color:#ade6e5ff; color: #2E86AB"
+                    )
 
         else:
             # 4. Fallback UI if the issue data failed to load
-            ui.label("Issue details could not be loaded.").classes("text-xl text-red-600")
+            ui.label("Issue details could not be loaded.").classes(
+                "text-xl text-red-600"
+            )
