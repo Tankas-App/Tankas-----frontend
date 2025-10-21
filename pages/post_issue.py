@@ -9,34 +9,47 @@ _issue_image = None
 # async def _handle_image_upload(issue):
 #     global _issue_image
 #     # _issue_image = issue.content
-#     file_bytes = await issue.file.read()  
+#     file_bytes = await issue.file.read()
 #     _issue_image = (issue.name, io.BytesIO(file_bytes), issue.type)
+
 
 async def _handle_image_upload(issue):
     global _issue_image
 
     # Get the file path
-    temp_path = issue.file._path
-    with open(temp_path, "rb") as f:
-        file_bytes = f.read()
+    file = issue.file
+    if hasattr(file, "_path") and file._path:
+
+        with open(file._path, "rb") as f:
+            file_bytes = f.read()
+    elif hasattr(file, "_data"):
+        file_bytes = file._data
 
     _issue_image = (issue.file.name, io.BytesIO(file_bytes), issue.file.content_type)
-    print(f"Uploaded: {issue.file.name}, type: {issue.file.content_type}, size: {len(file_bytes)} bytes")
+    print(
+        f"Uploaded: {issue.file.name}, type: {issue.file.content_type}, size: {len(file_bytes)} bytes"
+    )
+
 
 # function to create a post issue
 def _post_issue(data, files):
     print(files)
-    response = requests.post(url=f"{base_url}/api/issues", data=data, files=files, headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},)
+    response = requests.post(
+        url=f"{base_url}/api/issues",
+        data=data,
+        files=files,
+        headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},
+    )
     print(response.status_code, response.content)
     if response.status_code == 200:
         # json_data = response.json()
         # print(json_data)
-        ui.notify(
-            message= "Issues added successfully!",
-            type="positive")
+        ui.notify(message="Issues added successfully!", type="positive")
         return ui.navigate.to("/issue_confirmation")
     elif response.status_code == 422:
-        return ui.notify(message="Please ensure all inputs are filled!", type="negative")
+        return ui.notify(
+            message="Please ensure all inputs are filled!", type="negative"
+        )
     elif response.status_code == 401:
         return ui.navigate.to("/signin")
     elif response.status_code == 403:
@@ -44,6 +57,7 @@ def _post_issue(data, files):
             message="Access denied!",
             type="info",
         )
+
 
 @ui.page("/post_issue")
 def show_post_issue():
@@ -65,26 +79,32 @@ def show_post_issue():
         with ui.card().classes(
             "w-[30%] flex flex-col justify-center items-center mt-8 mb-8"
         ):
-            title = ui.input(label="Title", placeholder="enter your issue title").props(
-                "outlined"
-            ).classes("w-full bg-white")
-            description = ui.textarea(
-                "Description", placeholder="describe your issue in detail..."
-            ).props("outlined").classes("w-full bg-white")
-            with ui.row().classes("w-full flex flex-row justify-around items-center"):
-                ui.label("latitude")
-                ui.label("longitude")
-            with ui.row().classes("w-full flex flex-row justify-between items-center"):
-                latitude = (
-                    ui.input("Latitude")
-                    .props("outlined type=number")
-                    .classes("bg-white")
+            title = (
+                ui.input(label="Title", placeholder="enter your issue title")
+                .props("outlined")
+                .classes("w-full bg-white")
+            )
+            description = (
+                ui.textarea(
+                    "Description", placeholder="describe your issue in detail..."
                 )
-                longitude = (
-                    ui.input("Longitude")
-                    .props("outlined type=number")
-                    .classes("bg-white")
-                )
+                .props("outlined")
+                .classes("w-full bg-white")
+            )
+            # with ui.row().classes("w-full flex flex-row justify-around items-center"):
+            #     ui.label("latitude")
+            #     ui.label("longitude")
+            # with ui.row().classes("w-full flex flex-row justify-between items-center"):
+            #     latitude = (
+            #         ui.input("Latitude")
+            #         .props("outlined type=number")
+            #         .classes("bg-white")
+            #     )
+            #     longitude = (
+            #         ui.input("Longitude")
+            #         .props("outlined type=number")
+            #         .classes("bg-white")
+            #     )
             with ui.row().classes("w-full flex flex-row justify-around items-center"):
                 with ui.element("div"):
                     # ui.label("Priority:")
@@ -127,19 +147,22 @@ def show_post_issue():
                         "value",
                         lambda v: f"Difficulty: {difficulty_map.get(int(v), 'Unknown')}",
                     )
-            ui.upload(label="Upload photos", auto_upload=True, on_upload= _handle_image_upload).props(
-                "color=teal-7"
-            ).classes("w-full")
-            ui.button(text="Submit Report", on_click=lambda: _post_issue(
-                data={
-                    "title": title.value,
-                    "description": description.value,
-                    "latitude": latitude.value,
-                    "longitude": longitude.value,
-                    "difficulty": difficulty_map[difficulty_slider.value].lower(),
-                    "priority": priority_map[priority_slider.value].lower()
-                },
-                files={"picture": _issue_image}
-            )).props("flat dense no-caps").style(
-                "background-color:#007F7C"
-            ).classes("w-full text-white py-2")
+            ui.upload(
+                label="Upload photos", auto_upload=True, on_upload=_handle_image_upload
+            ).props("color=teal-7").classes("w-full")
+            ui.button(
+                text="Submit Report",
+                on_click=lambda: _post_issue(
+                    data={
+                        "title": title.value,
+                        "description": description.value,
+                        # "latitude": latitude.value,
+                        # "longitude": longitude.value,
+                        "difficulty": difficulty_map[difficulty_slider.value].lower(),
+                        "priority": priority_map[priority_slider.value].lower(),
+                    },
+                    files={"picture": _issue_image},
+                ),
+            ).props("flat dense no-caps").style("background-color:#007F7C").classes(
+                "w-full text-white py-2"
+            )

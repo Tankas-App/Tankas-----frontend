@@ -20,6 +20,9 @@ from pages.rewards import *
 from pages.work_submission1 import *
 from pages.review_submission import *
 from pages.volunteer import *
+from pages.user_profile import *
+from pages.edit_profile import *
+from pages.all_volunteers import *
 
 app.add_static_files("/assets", "assets")
 
