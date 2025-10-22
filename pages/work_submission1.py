@@ -25,10 +25,10 @@ async def _handle_image_upload(issue):
 
 
 # function to create a post issue
-def _submit_issue(files):
-    print(files)
+def _submit_issue(issue_id, files):
+    print(files, issue_id)
     response = requests.post(
-        url=f"{base_url}/api/issues",
+        url=f"{base_url}/api/issues/{issue_id}/resolve",
         files=files,
         headers={"Authorization": f"Bearer {app.storage.user.get("access_token")}"},
     )
@@ -37,7 +37,7 @@ def _submit_issue(files):
         # json_data = response.json()
         # print(json_data)
         ui.notify(message="Work submitted successfully!", type="positive")
-        return ui.navigate.to("/review_submission")
+        return ui.navigate.to("/issues")
     elif response.status_code == 422:
         return ui.notify(
             message="Please ensure all inputs are filled!", type="negative"
@@ -93,7 +93,7 @@ def show_work_submission1():
     issue = None
 
     issue_id = ui.context.client.request.query_params.get("id")
-    print(issue)
+    print(issue_id)
     try:
         response = requests.get(url=f"{base_url}/api/issues/{issue_id}")
         # print(response.status_code, response.content)
@@ -111,8 +111,8 @@ def show_work_submission1():
 
     # === SAFE IMAGE RENDERING ===
     before_image_url = (
-        issue.get("picture_url")
-        if issue and isinstance(issue, dict) and issue.get("picture_url")
+        issue.get("resolution_picture_url")
+        if issue and isinstance(issue, dict) and issue.get("resolution_picture_url")
         else "https://via.placeholder.com/400x300?text=Before+Image"
     )
 
@@ -251,8 +251,8 @@ def show_work_submission1():
         )
         ui.button(
             "Next",
-            on_click=lambda: _submit_issue(
-                files={"picture": _issue_image},
+            on_click=lambda: _submit_issue(issue_id,
+                files={"resolution_picture": _issue_image},
             ),
         ).props("flat dense no-caps").classes(
             "text-white text-lg font-semibold px-10 py-2 rounded-lg"
