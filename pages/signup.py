@@ -50,59 +50,62 @@ def show_signup_page():
     show_navbar()
 
     with ui.element("div").classes(
-        "w-full h-full flex flex-col justify-center items-center py-20 mt-10"
-    ).style('font-family: "Raleway", serif; background-color: #F7FFF7;'):
-        ui.label("Create your account").classes('text-3xl font-semibold mb-4')
-        ui.label("Join our community for a cleaner tomorrow").classes('font-semibold text-lg mb-4').style('color: #2E86AB')
-        with ui.card().classes("w-[30%] flex shadow-lg font-semibold mb-8"):
-            ui.label("Username")
-            username = (
-                ui.input(placeholder="Enter your username")
-                .classes("w-full")
-                .props("outlined")
-            )
-            ui.label("Email")
-            email = (
-                ui.input(placeholder="Enter your email")
-                .classes("w-full")
-                .props("outlined")
-            )
-            ui.label("Password")
-            password = (
-                ui.input(
-                    placeholder="Enter your password",
-                    password=True,
-                    password_toggle_button=True,
+        "w-full h-full flex flex-row justify-between items-center py-20 mt-10"
+    ).style('font-family: "Raleway", serif; background-color:#F7FFF7;'):
+        with ui.column().classes('w-1/2 flex justify-center items-center fixed bottom-0 right-0'):
+            ui.image("/assets/signup.png").classes('w-3/4 h-auto')
+        with ui.column().classes('w-1/2 flex flex-col justify-center items-center gap-4'):
+            ui.label("Create your account").classes('text-3xl font-semibold mb-4')
+            ui.label("Join our community for a cleaner tomorrow").classes('font-semibold text-lg mb-4').style('color: #2E86AB')
+            with ui.card().classes("w-[70%] flex shadow-lg font-semibold mb-8"):
+                ui.label("Username")
+                username = (
+                    ui.input(placeholder="Enter your username")
+                    .classes("w-full")
+                    .props("outlined")
                 )
-                .classes("w-full")
-                .props("outlined")
-            )
-            ui.label("Display name")
-            display_name = (
-                ui.input(
-                    placeholder="Enter a display name",
+                ui.label("Email")
+                email = (
+                    ui.input(placeholder="Enter your email")
+                    .classes("w-full")
+                    .props("outlined")
                 )
-                .classes("w-full")
-                .props("outlined")
-            )
-            ui.checkbox(
-                text="Accept our terms and conditions and privacy policy"
-            ).classes("text-gray-400 text-sm")
-            _signup_btn = (
-                ui.button(
-                    "Sign Up",
-                    on_click=lambda: _signup(
-                        {
-                            "username": username.value,
-                            "email": email.value,
-                            "password": password.value,
-                            "display_name": display_name.value,
-                        }
-                    ),
+                ui.label("Password")
+                password = (
+                    ui.input(
+                        placeholder="Enter your password",
+                        password=True,
+                        password_toggle_button=True,
+                    )
+                    .classes("w-full")
+                    .props("outlined")
                 )
-                .props("flat dense no-caps")
-                .classes("w-full text-white py-2").style('background-color: #007F7C')
-            )
-        with ui.row().classes('gap-0'):
-            ui.label("Already have an account?")
-            ui.link("Sign in", "/signin").classes('no-underline font-semibold').style('color: #2E86AB')
+                ui.label("Display name")
+                display_name = (
+                    ui.input(
+                        placeholder="Enter a display name",
+                    )
+                    .classes("w-full")
+                    .props("outlined")
+                )
+                ui.checkbox(
+                    text="Accept our terms and conditions and privacy policy"
+                ).classes("text-gray-400 text-sm")
+                _signup_btn = (
+                    ui.button(
+                        "Sign Up",
+                        on_click=lambda: _signup(
+                            {
+                                "username": username.value,
+                                "email": email.value,
+                                "password": password.value,
+                                "display_name": display_name.value,
+                            }
+                        ),
+                    )
+                    .props("flat dense no-caps")
+                    .classes("w-full text-white py-2").style('background-color: #007F7C')
+                )
+            with ui.row().classes('gap-0'):
+                ui.label("Already have an account?")
+                ui.link("Sign in", "/signin").classes('no-underline font-semibold').style('color: #2E86AB')

@@ -21,17 +21,25 @@ def show_sidebar():
         user = {"display_name": "Unknown User", "email": "N/A", "avatar": ""}
         ui.notify(f"Error fetching profile: {e}", color="red")
 
+    avatar = user.get("avatar", None)
+
+    # Build full avatar URL if needed
+    if avatar:
+        avatar_url = avatar if avatar.startswith("http") else f"{base_url}/{avatar}"
+    else:
+        avatar_url = None
+
     # ---- Sidebar container ----
     with ui.column().classes(
-        "w-[20%] h-screen bg-gray-200 fixed left-0 top-0 z-50 text-white px-10 py-20 space-y-4"
+        "w-[20%] h-screen bg-gray-200 fixed left-0 top-0 z-50 text-white px-2 py-10 space-y-4"
     ).style('background-color: #F7FFF7; font-family: "Raleway", serif;'):
 
         # Navigation menu
         with ui.column().classes("gap-1 w-full"):
             # Logo
-            with ui.row().classes("justify-center items-center w-full px-4 py-2"):
-                ui.image("/assets/Tankas_Brand_Mark@2x.png").classes(
-                    "cursor-pointer w-1/7"
+            with ui.row().classes("justify-center items-center w-full px-4"):
+                ui.image("/assets/Logo1.png").classes(
+                    "cursor-pointer w-1/4"
                 ).on("click", lambda: ui.navigate.to("/"))
 
             ui.separator().classes("w-full border-t border-gray-300 my-2")
@@ -87,11 +95,14 @@ def show_sidebar():
             with ui.row().classes("items-center gap-2 cursor-pointer").on(
                 "click", lambda: ui.navigate.to("/user_profile")
             ):
-                # Avatar
-                avatar_text = (
-                    user["display_name"][0].upper() if user.get("display_name") else "U"
-                )
-                ui.avatar(avatar_text).classes("text-white").props("color=teal-7")
+                if avatar_url:
+                            ui.image(avatar_url).classes(
+                                "w-16 h-16 rounded-full object-cover border-2 border-teal-700"
+                            )
+                else:
+                    ui.avatar(name[:2].upper()).classes(
+                        "w-24 h-24 text-white text-2xl"
+                    ).style("background-color: #007F7C")
 
                 # Info
                 with ui.column().classes("gap-1"):
