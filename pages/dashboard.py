@@ -47,7 +47,7 @@ def show_dashboard():
 
         with ui.column().classes("w-[80%]"):
             if user:
-                with ui.element("div").classes("w-full px-5"):
+                with ui.element("div").classes("w-full px-5 py-10"):
                     with ui.row().classes(""):
                         # Header
                         ui.label(f"Welcome back,").classes("text-3xl font-bold mb-6")
@@ -88,16 +88,16 @@ def show_dashboard():
                             )
 
                     # Buttons
-                    with ui.row().classes("gap-4 mb-8 flex flex-col sm:flex-row"):
+                    with ui.row().classes("w-full gap-4 mb-8 flex flex-row justify-between items-center sm:flex-row"):
                         ui.button(
                             "Report a New Issue",
                             on_click=lambda: ui.navigate.to("/post_issue"),
-                        ).classes("text-white font-semibold rounded-full py-3").style(
+                        ).classes("w-1/2 text-white font-semibold rounded-full py-3").style(
                             "background-color: #007F7C;"
-                        )
-                        ui.button("Volunteer Now").classes(
-                            "flex-1 bg-[#E6F3E8] text-gray-700 font-semibold rounded-full py-3 hover:bg-[#DDEFE0]"
-                        )
+                        ).props('flat dense no-caps')
+                        ui.button("Volunteer Now", on_click=lambda: ui.navigate.to("/volunteer")).classes(
+                            "w-1/2 text-white font-semibold rounded-full py-3"
+                        ).props('flat dense no-caps').style('background-color: #007F7C;')
 
                     # Progress Section
                     with ui.card().classes(
@@ -108,7 +108,7 @@ def show_dashboard():
                             ui.label("Next Reward: Eco–Warrior Badge").classes(
                                 "text-gray-600 text-sm"
                             )
-                        ui.linear_progress(value=0.45).props("color=green").classes(
+                        ui.linear_progress(value=0.45).props("color=teal-7").classes(
                             "h-2 rounded-full"
                         )
                         ui.label("450 / 1000 XP").classes(
@@ -130,7 +130,7 @@ def show_dashboard():
                             "p-4 mb-3 rounded-xl border border-gray-200 bg-white flex flex-col gap-1"
                         ):
                             with ui.row().classes("gap-2 items-center"):
-                                ui.icon("info").classes("text-[#00C853]")
+                                ui.icon("info").style("color: #007F7C;")
                                 ui.label(text).classes("text-gray-800")
                             ui.label(time).classes("text-gray-500 text-sm ml-6")
             else:

@@ -6,12 +6,6 @@ import io
 
 _issue_image = None
 
-# async def _handle_image_upload(issue):
-#     global _issue_image
-#     # _issue_image = issue.content
-#     file_bytes = await issue.file.read()
-#     _issue_image = (issue.name, io.BytesIO(file_bytes), issue.type)
-
 
 async def _handle_image_upload(issue):
     global _issue_image

@@ -6,7 +6,7 @@ def show_navbar():
 
     with ui.element('div').classes('w-full flex flex-row justify-between items-center px-20 py-5 fixed top-0 left-0 z-50 bg-white text-sm shadow-md').style('font-family: "Raleway", serif; color: #2E86AB'):
         with ui.row().classes('items-center gap-8'):
-            ui.image('/assets/Tankas_Logo_primary@2x.png').classes('w-16 cursor-pointer').on('click', lambda: ui.navigate.to('/'))
+            ui.image('/assets/Logo1.png').classes('w-16 cursor-pointer').on('click', lambda: ui.navigate.to('/'))
             
         with ui.row():
             ui.link('Home', '/').classes('no-underline font-semibold text-black')

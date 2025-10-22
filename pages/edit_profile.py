@@ -79,17 +79,17 @@ def edit_profile():
 
     # === UI Layout ===
     with ui.column().classes(
-        "w-full min-h-screen items-center justify-center p-8"
+        "w-full min-h-screen items-center justify-center items-center p-8"
     ).style("background-color:#F7FFF7"):
 
-        with ui.card().classes("w-[400px] p-6 bg-white shadow-lg rounded-xl"):
+        with ui.card().classes("w-[30%] p-6 bg-white shadow-lg rounded-xl"):
 
             ui.label("Edit Profile").classes(
-                "text-2xl font-bold mb-4 justify-center items-center flex"
+                "w-full text-2xl font-bold mb-4 justify-center items-center flex"
             )
 
             # Avatar Display
-            with ui.row().classes("justify-center mb-4"):
+            with ui.row().classes(" w-full justify-center items-center mb-4"):
                 if avatar_url:
                     avatar_image = ui.image(avatar_url).classes(
                         "w-24 h-24 rounded-full object-cover border-2 border-teal-700"
@@ -107,16 +107,19 @@ def edit_profile():
                 on_upload=upload_avatar,
                 auto_upload=True,
                 multiple=False,
-            ).props("accept=image/*").classes("mb-4 w-full")
+            ).props("accept=image/* color=teal-7").classes("mb-4 w-full")
 
             # Display Name Input
             name_input = (
                 ui.input("Display Name", value=display_name)
-                .props("outlined")
+                .props("outlined color=teal-7")
                 .classes("mb-4 w-full")
             )
 
             # Save Button
             ui.button("Save Changes", on_click=save_profile).classes(
-                "bg-[#007F7C] text-white rounded-lg px-4 py-2 w-full"
-            )
+                "text-white rounded-lg px-4 py-2 w-full"
+            ).style("background-color: #007F7C").props("flat dense no-caps")
+            ui.button("Cancel", on_click=lambda: ui.navigate.back()).classes(
+                "text-white rounded-lg px-4 py-2 w-full"
+            ).style("background-color: #ade6e5ff").props("flat dense no-caps")

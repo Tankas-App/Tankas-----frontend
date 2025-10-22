@@ -19,7 +19,7 @@ def show_issue_detail():
     issue_id = ui.context.client.request.query_params.get("id")
     try:
         response = requests.get(url=f"{base_url}/api/issues/{issue_id}")
-        # print(response.st atus_code, response.content)
+        # print(response.status_code, response.content)
         if response.status_code == 200:
             json_data = response.json()
             print(json_data)
@@ -56,16 +56,74 @@ def show_issue_detail():
                         "text-3xl  mt-4 font-bold"
                     ).style("color: #2E86AB")
                     ui.label(text=issue["description"]).classes("text-lg")
-                    with ui.row().classes():
-                        ui.label("Difficulty: ").classes("text-lg font-semibold")
-                        ui.label(text=issue["difficulty"]).classes(
-                            "text-lg font-semibold text-gray-500"
-                        )
-                    with ui.row().classes():
-                        ui.label("Priority: ").classes("text-lg font-semibold")
-                        ui.label(text=issue["priority"]).classes(
-                            "text-lg font-semibold text-gray-500"
-                        )
+                    ui.label(text=f"Latitude: {issue['latitude']:.4f}").classes(
+                        "text-lg font-semibold mt-4"
+                    )
+                    ui.label(text=f"Longitude: {issue['longitude']:.4f}").classes(
+                        "text-lg font-semibold mt-4"
+                    )
+
+
+                    ui.separator().classes("h-0.5 w-full bg-gray-300  mt-8")
+                    with ui.row().classes("w-full flex flex-row justify-between"):
+                        with ui.column().classes("w-[50%]"):
+                            with ui.row().classes():
+                                if issue["difficulty"] == "easy":
+                                    ui.label("Difficulty: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["difficulty"]).classes(
+                                        "text-lg font-semibold bg-green-200 px-2 rounded-lg"
+                                    )
+                                elif issue["difficulty"] == "medium":
+                                    ui.label("Difficulty: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["difficulty"]).classes(
+                                        "text-lg font-semibold bg-yellow-200 px-2 rounded-lg"
+                                    )
+                                else:
+                                    ui.label("Difficulty: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["difficulty"]).classes(
+                                        "text-lg font-semibold bg-red-200"
+                                    )
+                            with ui.row().classes():
+                                if issue["priority"] == "low":
+                                    ui.label("Priority: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["priority"]).classes(
+                                        "text-lg font-semibold bg-green-200 px-2 rounded-lg"
+                                    )
+                                elif issue["priority"] == "medium":
+                                    ui.label("Priority: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["priority"]).classes(
+                                        "text-lg font-semibold bg-yellow-200 px-2 rounded-lg"
+                                    )
+                                else:
+                                    ui.label("Priority: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["priority"]).classes(
+                                        "text-lg font-semibold bg-red-200 px-2 rounded-lg"
+                                    )
+                        with ui.column().classes("w-[50%]"):
+                            with ui.row().classes():
+                                if issue["status"] == "in_progress":
+                                        ui.label("Status: ").classes("text-lg font-semibold")
+                                        ui.label(text=issue["status"]).classes(
+                                            "text-lg font-semibold bg-yellow-200 px-2 rounded-lg"
+                                        )
+                                elif issue["status"] == "resolved":
+                                    ui.label("Status: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["status"]).classes(
+                                        "text-lg font-semibold bg-green-200 px-2 rounded-lg"
+                                    )
+                                else:
+                                    ui.label("Status: ").classes("text-lg font-semibold")
+                                    ui.label(text=issue["status"]).classes(
+                                        "text-lg font-semibold bg-red-200 px-2 rounded-lg"
+                                    )
+                            with ui.row().classes('flex flex-row items-center gap-1'):
+                                ui.label("Reward: ").classes("text-lg font-semibold")
+                                ui.icon('star').style('color: #f8d50eff')
+                                ui.label(
+                                    text=f"{issue['points_assigned']} points"
+                                ).classes("text-lg font-semibold text-gray-500")
+                ui.separator().classes("h-0.5 w-full bg-gray-300  mt-8")
+                
                 with ui.row().classes(
                     "w-full flex flex-row justify-between items-center py-5 mt-8"
                 ):

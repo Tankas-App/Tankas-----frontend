@@ -93,3 +93,7 @@ def join_movement_page():
                     ui.label(
                         "Yes, I'm interested in participating in community cleaning events!"
                     ).classes("text-night")
+
+                ui.button('Submit', on_click=lambda: ui.navigate.to("/all_volunteers")).classes(
+                    "bg-teal text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-teal-700 transition duration-300"
+                ).props('flat dense no-caps')

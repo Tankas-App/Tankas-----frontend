@@ -340,3 +340,5 @@ COLORS
 #2E86AB - BLUE(NCS)  //header texts
 #0A0A0A - NIGHT // texts
 #f8d50eff - GOLD //leaderboard buttons
+#37e176 - 
+#9021daff
